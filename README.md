@@ -1,6 +1,3 @@
 # MuhiqWhatsappBot
-this is place to save my ongoing project 
-
-now this is can be hosted bot only can copy your chat and chat agains to you 
-
-urlyourserver/sms
+this is place to save my ongoing project for humanity help world
+and complete my study
