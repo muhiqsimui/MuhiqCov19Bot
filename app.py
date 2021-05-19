@@ -53,7 +53,7 @@ def sms_reply():
     responded = False
 
     if 'menu' in pesan or 'Menu' in pesan or 'MENU' in pesan:
-        text = f'\n ==========🚀 *MENU* 🚀==========\n\n Berikut adalah fitur-fitur yang dapat anda gunakan : \n\n 1. Situasi Covid-19 Indonesia \n 2. Apa itu COVID-19 ? \n 3. Apa gejala COVID-19 ? \n 4. Cara melindungi diri dari COVID-19 \n 5. Cara melindungi orang lain dari COVID-19? \n 6. Penggunaan Masker kain? \n 7. Rumah sakit Rujukan COVID-19 \n 8. Apa itu rapid test ?\n 9. Lokasi swab test yogyakarta \n\n Silahkan balas dengan mengetikan angka sesuai Menu'
+        text = f'\n ==========🚀 *MENU* 🚀==========\n\n Berikut adalah fitur-fitur yang dapat anda gunakan : \n\n 1. Situasi COVID-19 Indonesia \n 2. Apa itu COVID-19 ? \n 3. Apa gejala COVID-19 ? \n 4. Cara melindungi diri dari COVID-19 \n 5. Cara melindungi orang lain dari COVID-19? \n 6. Penggunaan Masker kain? \n 7. Rumah sakit Rujukan COVID-19 \n 8. Edukasi test COVID-19\n 9. SKRINING Mandiri COVID-19 \n\n Silahkan balas dengan mengetikan angka sesuai Menu'
         # msg.body(f'Halo pengguna, Anda saat ini menggunakan whatsapp bot covid 19, ini adalah project tugas akhir yang dikerjakan oleh Programmer Muhammad Iqbal \n Universitas islam indonesia \n')
         msg.body(text)
         responded = True
@@ -61,6 +61,9 @@ def sms_reply():
         text = f"🚀Pantau situasi Covid-19🚀 \n\n *🌎 Global 🌎* \n Kasus Terkonfirmasi : {cov_total} \n Sembuh : {cov_recover} \n Meninggal : {cov_death} \n\n "
         text2 = f"*🇮🇩 Indonesia 🇮🇩* \n Kasus Terkonfirmasi : {cov_update['total']['jumlah_positif']} \n Positif : {cov_update['total']['jumlah_dirawat']}\n Sembuh : {cov_update['total']['jumlah_sembuh']} \n\n"
         text3 = f"*✈ Yogyakarta ✈* \n Kasus Terkonfirmasi : {cov_total_diy}\n Sembuh : {cov_sembuh_diy}\n Meninggal : {cov_meninggal_diy}"
+        # msg.media(
+        #     "https://infeksiemerging.kemkes.go.id/storage/posts/May2021/ENnufhHVqBJr4JQix8mL.png")
+        # tidak pakai gambar karena memperlambat jalannya app
         msg.body(text+text2+text3)
         responded = True
     if '2' in pesan:
@@ -80,7 +83,7 @@ def sms_reply():
         responded = True
     if '5' in pesan:
         text = f"*🛡️Lakukan ini agar kita dapat menghentikan penyebaran virus COVID-19🛡️* \n\n"
-        text2 = f"✅ Bekerja, belajar dan beribadah di rumah \n\n✅ Jaga jarak minimal 1 meter dengan siapapun disekitarmu \n\n✅ Saat kamu batuk atau bersin: menjauh dan tutup mulut serta hidung kamu dengan tisu, saputangan atau lipatan siku. Segera buang tisu yang telah kamu pakai ke tempat sampah \n\n✅ Kalau kamu demam, batuk atau tidak enak badan, pakai masker. Jangan lupa ikuti cara pakai masker yang benar \n\n✅ Jika terpaksa beraktivitas di luar rumah, pakailah masker kain, jangan lupa cuci masker kain setiap hari \n\n✅ Jangan pernah meludah sembarangan \n\n✅ Sering cuci tangan pakai sabun dan air mengalir selama minimal 20 detik \n\n✅ Segera hubungi call center 119 atau Rumah Sakit rujukan bila orang terdekatmu mengalami gejala COVID-19"
+        text2 = f"✅Bekerja, belajar dan beribadah di rumah \n\n✅ Jaga jarak minimal 1 meter dengan siapapun disekitarmu \n\n✅ Saat kamu batuk atau bersin: menjauh dan tutup mulut serta hidung kamu dengan tisu, saputangan atau lipatan siku. Segera buang tisu yang telah kamu pakai ke tempat sampah \n\n✅ Kalau kamu demam, batuk atau tidak enak badan, pakai masker. Jangan lupa ikuti cara pakai masker yang benar \n\n✅ Jika terpaksa beraktivitas di luar rumah, pakailah masker kain, jangan lupa cuci masker kain setiap hari \n\n✅ Jangan pernah meludah sembarangan \n\n✅ Sering cuci tangan pakai sabun dan air mengalir selama minimal 20 detik \n\n✅ Segera hubungi call center 119 atau Rumah Sakit rujukan bila orang terdekatmu mengalami gejala COVID-19"
         msg.body(text+text2)
         responded = True
     if '6' in pesan:
@@ -99,17 +102,21 @@ def sms_reply():
 
     # Tutup Menampilkan daftar rumah sakit indonesia
     if '8' in pesan:
-        text = f""
-        msg.body(text)
+        title = f"*Edukasi test COVID-19*\n\nUntuk mengetahui kita terjangkit corona atau tidak adalah dengan cara melakukan serangkaian test dari tenaga medis saat ini tersedia berbagai macam test antara lain Rapid Test, SWAB Test, PCR, dan GENOS berikut penjelasannya :\n\n"
+        text1 = f" *1.Rapid Test* \nRapid test adalah metode pemeriksaan / tes secara cepat didapatkan hasilnya. Pemeriksaan ini menggunakan alat catridge untuk melihat adanya  antibodi yang ada dalam tubuh ketika ada infeksi virus. \n\n"
+        text2 = f" *2.SWAB Test Antigen* \nSwab adalah cara untuk memperoleh bahan pemeriksaan ( sampel ) . Swab dilakukan pada nasofaring dan atau orofarings. Pengambilan ini dilakukan dengan cara mengusap rongga nasofarings  dan atau orofarings dengan menggunakan alat seperti  kapas lidi khusus. \n\n"
+        text3 = f" *3.PCR* \nPCR adalah singkatan dari polymerase chain reaction. PCR merupakan metode pemeriksaan virus SARS Co-2 dengan mendeteksi DNA virus. Uji ini akan  didapatkan hasil apakah seseorang positif atau tidak SARS Co-2. Dibanding rapid test, pemeriksaan RT-PCR lebih akurat. Metode ini jugalah yang direkomendasikan WHO untuk mendeteksi Covid-19. Namun akurasi ini dibarengi dengan kerumitan proses dan harga alat yang lebih tinggi. \n\n"
+        text4 = f" *4.GeNose*\n Gadjah Mada Electronic Nose COVID-19 (GeNose C19) adalah alat tes diagnostik cepat berbasis kecerdasan buatan untuk mendeteksi COVID-19 melalui embusan napas yang dikembangkan oleh Universitas Gadjah Mada. Orang yang menggunakan alat ini cukup mengembuskan napas ke kantong sekali pakai untuk kemudian dianalisis oleh GeNose dalam waktu tiga menit \n\n"
+        msg.body(title+text1+text2+text3+text4)
         responded = True
     if '9' in pesan:
-        text = f""
+        text = f"Anda dapat melakukan skrining awal COVID-19 dengan mengakses link berikut https://skrining.jogjaprov.go.id/"
         msg.body(text)
         responded = True
 
     def rs(text):
         pesannya = pesan.title()
-        text0 = f"Berikut adalah Rumah Sakit rujukan COVID-19 untuk daerah {pesannya}\n\n"
+        text0 = f"Berikut adalah rumah sakit rujukan COVID-19 untuk daerah {pesannya}\n\n"
         msg.body(text0+text)
         responded = True
     # fungsi untuk menampilkan rumah sakit rujukan covid-19 di Indonesia
@@ -187,7 +194,7 @@ def sms_reply():
 
     daerah()
     if responded == False:
-        msg.body('Anda bisa ketik Menu untuk mulai menggunakan whatsapp bot covid-19')
+        msg.body('Anda bisa ketik Menu untuk mulai menggunakan whatsapp bot COVID-19')
 
     return str(resp)
 
