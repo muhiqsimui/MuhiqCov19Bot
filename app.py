@@ -102,7 +102,7 @@ def sms_reply():
 
     # Tutup Menampilkan daftar rumah sakit indonesia
     if '8' in pesan:
-        title = f"*Edukasi test COVID-19*\n\nUntuk mengetahui kita terjangkit corona atau tidak adalah dengan cara melakukan serangkaian test dari tenaga medis saat ini tersedia berbagai macam test antara lain Rapid Test, SWAB Test, PCR, dan GENOS berikut penjelasannya :\n\n"
+        title = f"*Edukasi test COVID-19*\n\nUntuk mengetahui kita terjangkit corona atau tidak adalah dengan cara melakukan serangkaian test dari tenaga medis saat ini tersedia berbagai macam test antara lain Rapid Test, SWAB Test, PCR, dan GeNose berikut penjelasannya :\n\n"
         text1 = f" *1.Rapid Test* \nRapid test adalah metode pemeriksaan / tes secara cepat didapatkan hasilnya. Pemeriksaan ini menggunakan alat catridge untuk melihat adanya  antibodi yang ada dalam tubuh ketika ada infeksi virus. \n\n"
         text2 = f" *2.SWAB Test Antigen* \nSwab adalah cara untuk memperoleh bahan pemeriksaan ( sampel ) . Swab dilakukan pada nasofaring dan atau orofarings. Pengambilan ini dilakukan dengan cara mengusap rongga nasofarings  dan atau orofarings dengan menggunakan alat seperti  kapas lidi khusus. \n\n"
         text3 = f" *3.PCR* \nPCR adalah singkatan dari polymerase chain reaction. PCR merupakan metode pemeriksaan virus SARS Co-2 dengan mendeteksi DNA virus. Uji ini akan  didapatkan hasil apakah seseorang positif atau tidak SARS Co-2. Dibanding rapid test, pemeriksaan RT-PCR lebih akurat. Metode ini jugalah yang direkomendasikan WHO untuk mendeteksi Covid-19. Namun akurasi ini dibarengi dengan kerumitan proses dan harga alat yang lebih tinggi. \n\n"
