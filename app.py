@@ -69,7 +69,7 @@ def sms_reply():
     responded = False
 
     if 'menu' in pesan or 'Menu' in pesan or 'MENU' in pesan:
-        text = f'\n ==========🚀 *MENU* 🚀==========\n\n Berikut adalah fitur-fitur yang dapat anda gunakan : \n\n 1. Situasi COVID-19 Indonesia \n 2. Apa itu COVID-19 ? \n 3. Apa gejala COVID-19 ? \n 4. Cara melindungi diri dari COVID-19 \n 5. Cara melindungi orang lain dari COVID-19? \n 6. Penggunaan Masker kain? \n 7. Rumah sakit Rujukan COVID-19 \n 8. Edukasi test COVID-19\n 9. SKRINING Mandiri COVID-19 \n ketik *NEWS* untuk Berita seputar COVID-19 \n\n Silahkan balas dengan mengetikan angka sesuai Menu'
+        text = f'\n ==========🚀 *MENU* 🚀==========\n\n Berikut adalah fitur-fitur yang dapat anda gunakan : \n\n 1. Situasi COVID-19 Indonesia \n 2. Apa itu COVID-19 ? \n 3. Apa gejala COVID-19 ? \n 4. Cara melindungi diri dari COVID-19 \n 5. Cara melindungi orang lain dari COVID-19? \n 6. Penggunaan Masker kain? \n 7. Rumah sakit Rujukan COVID-19 \n 8. Edukasi test COVID-19\n 9. SKRINING Mandiri COVID-19 \n\n ketik *NEWS* untuk Berita seputar COVID-19 \n\n Silahkan balas dengan mengetikan angka sesuai Menu'
         # msg.body(f'Halo pengguna, Anda saat ini menggunakan whatsapp bot covid 19, ini adalah project tugas akhir yang dikerjakan oleh Programmer Muhammad Iqbal \n Universitas islam indonesia \n')
         msg.body(text)
         responded = True
@@ -138,14 +138,19 @@ def sms_reply():
         msg.body(text)
         responded = True
 
+    def prolog():
+        text = f"Berikut daftar *Rumah Sakit rujukan COVID-19* \n\n"
+        msg.body(text)
+
     def rs(text):
-        pesannya = pesan.title()
+
         # f"Berikut adalah rumah sakit rujukan COVID-19 untuk daerah {pesannya}\n\n"
-        text0 = f""
-        msg.body(text0+text)
+
+        msg.body(text)
         responded = True
 
     def cari(kota):
+        prolog()
         # rs_url = r.get("https://dekontaminasi.com/api/id/covid19/hospitals")
         # BACKUP API KALO DOWN
         rs_url = r.get(
@@ -153,7 +158,7 @@ def sms_reply():
         datrs = rs_url.json()
         for j in datrs:
             if j['province'] == kota:
-                rs(f"\nProvinsi :{j['province']}\nKota : {j['region']}\nNama RS :{j['name']}\nTelepon :{j['phone']}\nAlamat RS :{j['address']}\n.\n.")
+                rs(f".\n\n *{j['province']}* \nKota : {j['region']}\nNama RS :{j['name']}\nTelepon :{j['phone']}\nAlamat RS :{j['address']}\n.\n.")
 
     def daerah():
 
