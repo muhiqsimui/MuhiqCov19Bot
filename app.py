@@ -38,6 +38,9 @@ cov_raw_diy = resp_diy.json()
 cov_total_diy = cov_raw_diy['regions'][9]['numbers']['infected']
 cov_meninggal_diy = cov_raw_diy['regions'][9]['numbers']['fatal']
 cov_sembuh_diy = cov_raw_diy['regions'][9]['numbers']['recovered']
+cov_provin = cov_raw_diy['regions']
+
+# fungsi untuk menampilkan stat tiap provinsi
 
 
 @ app.route("/")
@@ -48,13 +51,7 @@ def web():
 
 @ app.route("/web")
 def hello():
-    # cov_vaksin = r.get(
-    #     'https://data.covid19.go.id/public/api/pemeriksaan-vaksinasi.json')
-    # vaks = cov_vaksin.json()
-    # jw = vaks['pemeriksaan']['total']
-    # text = f"SPESIMEN ANTIGEN : {jw['jumlah_spesimen_antigen']} <br>SPESIMEN PCR :{jw['jumlah_spesimen_pcr_tcm']}"
-    # return(text)
-    return("OK hello")
+    return "ok"
 
 
 @ app.route("/sms", methods=['POST'])
@@ -143,9 +140,6 @@ def sms_reply():
         msg.body(text)
 
     def rs(text):
-
-        # f"Berikut adalah rumah sakit rujukan COVID-19 untuk daerah {pesannya}\n\n"
-
         msg.body(text)
         responded = True
 
@@ -156,6 +150,9 @@ def sms_reply():
         rs_url = r.get(
             "https://raw.githubusercontent.com/muhiqsimui/PyTraining/main/json/rs.json")
         datrs = rs_url.json()
+        for pro in cov_provin:
+            if pro['name'] == kota:
+                rs(f".\n *{pro['name']}* \n Kasus :{pro['numbers']['infected']} \n Sembuh : {pro['numbers']['recovered']} \n Meninggal :{pro['numbers']['fatal']}\n\n")
         for j in datrs:
             if j['province'] == kota:
                 rs(f".\n\n *{j['province']}* \nKota : {j['region']}\nNama RS :{j['name']}\nTelepon :{j['phone']}\nAlamat RS :{j['address']}\n.\n.")
