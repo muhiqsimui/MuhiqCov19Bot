@@ -11,42 +11,65 @@ coder = "Muhammad Iqbal"
 # ganti variable server jika terjadi eror pada API
 # server 1 API Javier Aviles
 # server 2 API Mathdroid
-server = 2
+server = 1
 if(server == 1):
     covdunia = r.get('https://coronavirus-19-api.herokuapp.com/all')
     jw = covdunia.json()
     cov_total = jw['cases']
     cov_death = jw['deaths']
     cov_recover = jw['recovered']
+    covduniadet = r.get("https://coronavirus-19-api.herokuapp.com/countries/")
+    jg = covduniadet.json()
+    cov_total_negara = len(jg)
 elif(server == 2):
     covdunia = r.get('https://covid19.mathdro.id/api')
     jw = covdunia.json()
     cov_total = jw['confirmed']['value']
     cov_death = jw['deaths']['value']
     cov_recover = jw['recovered']['value']
+    cov_total_negara = 'belum diketahui'
 
 # indonesia
-resp = r.get('https://dekontaminasi.com/api/id/covid19/stats')
-cov_raw = resp.json()
-cov_update = cov_raw['numbers']
-cov_ind_case = cov_update['infected']
-cov_ind_reco = cov_update['recovered']
-cov_ind_fatal = cov_update['fatal']
-# # yogyakarta
-resp_diy = r.get('https://dekontaminasi.com/api/id/covid19/stats')
-cov_raw_diy = resp_diy.json()
-cov_total_diy = cov_raw_diy['regions'][9]['numbers']['infected']
-cov_meninggal_diy = cov_raw_diy['regions'][9]['numbers']['fatal']
-cov_sembuh_diy = cov_raw_diy['regions'][9]['numbers']['recovered']
-cov_provin = cov_raw_diy['regions']
+# SERVER 1 DEKONTAMINASI
+# SERVER 2 COVID19.GO.ID PEMERINTAH
+server_ind = 2
+if (server_ind == 1):
+    xin = r.get('https://dekontaminasi.com/api/id/covid19/stats')
+    cov_raw = xin.json()
+    cov_update = cov_raw['numbers']
+    cov_ind_case = cov_update['infected']
+    cov_ind_reco = cov_update['recovered']
+    cov_ind_fatal = cov_update['fatal']
+elif(server_ind == 2):
+    xin = r.get('https://data.covid19.go.id/public/api/update.json')
+    cov_raw = xin.json()
+    cov_update = cov_raw['update']
+    cov_ind_case = cov_update['total']['jumlah_positif']
+    cov_ind_reco = cov_update['total']['jumlah_sembuh']
+    cov_ind_fatal = cov_update['total']['jumlah_meninggal']
 
+# # yogyakarta
+if (server_ind == 1):
+    resp_diy = r.get('https://dekontaminasi.com/api/id/covid19/stats')
+    cov_raw_diy = resp_diy.json()
+    cov_total_diy = cov_raw_diy['regions'][9]['numbers']['infected']
+    cov_meninggal_diy = cov_raw_diy['regions'][9]['numbers']['fatal']
+    cov_sembuh_diy = cov_raw_diy['regions'][9]['numbers']['recovered']
+    cov_provin = cov_raw_diy['regions']
+if (server_ind == 2):
+    # BELUM DIPERBAIKI NANTI DISEUASIKAN SAMA BAGIAN COVID.ID PEMERINTAh
+    resp_diy = r.get('https://dekontaminasi.com/api/id/covid19/stats')
+    cov_raw_diy = resp_diy.json()
+    cov_total_diy = cov_raw_diy['regions'][9]['numbers']['infected']
+    cov_meninggal_diy = cov_raw_diy['regions'][9]['numbers']['fatal']
+    cov_sembuh_diy = cov_raw_diy['regions'][9]['numbers']['recovered']
+    cov_provin = cov_raw_diy['regions']
 # fungsi untuk menampilkan stat tiap provinsi
 
 
 @ app.route("/")
 def web():
     return render_template("index.php", cov_death_world=cov_death, cov_recover_world=cov_recover, case_world=cov_total, me=coder, positifCovid=cov_ind_case, sembuh=cov_ind_reco, kematian=cov_ind_fatal, sembuh_diy=cov_sembuh_diy, meninggal_diy=cov_meninggal_diy, total_diy=cov_total_diy)
-    # return render_template("index.php", cov_death_world=f'{jw["deaths"]}', cov_recover_world=f'{jw["recovered"]}', case_world=f'{jw["cases"]}', sembuh_diy=cov_sembuh_diy, meninggal_diy=cov_meninggal_diy, total_diy=cov_total_diy, me=coder, positifCovid=cov_update['total']['jumlah_positif'], sembuh=cov_update['total']['jumlah_sembuh'], kematian=cov_update['total']['jumlah_meninggal'], dirawat=cov_update['total']['jumlah_dirawat'], jp_day=cov_update['penambahan']['jumlah_positif'], jp_death=cov_update['penambahan']['jumlah_meninggal'], jp_recover=cov_update['penambahan']['jumlah_sembuh'], jp_treated=cov_update['penambahan']['jumlah_dirawat'], jp_date=cov_update['penambahan']['created'])
 
 
 @ app.route("/web")
@@ -71,9 +94,10 @@ def sms_reply():
         msg.body(text)
         responded = True
     if '1' in pesan:
-        text = f"🚀Pantau situasi Covid-19🚀 \n\n *🌎 Global 🌎* \n Kasus Terkonfirmasi : {cov_total} \n Sembuh : {cov_recover} \n Meninggal : {cov_death} \n\n "
+        text = f"🚀Pantau situasi Covid-19🚀 \n\n *🌎 Global 🌎* \n Kasus Terkonfirmasi : {cov_total} \n Sembuh : {cov_recover} \n Meninggal : {cov_death} \n Total negara : {cov_total_negara} \n\n "
         text2 = f"\n *🇮🇩 Indonesia 🇮🇩* \n Kasus Terkonfirmasi : {cov_ind_case} \n Sembuh : {cov_ind_reco}\n Meninggal : {cov_ind_fatal} \n\n"
         text3 = f"\n *✈ Yogyakarta ✈* \n Kasus Terkonfirmasi : {cov_total_diy}\n Sembuh : {cov_sembuh_diy}\n Meninggal : {cov_meninggal_diy}"
+        text4 = f"\n\n Anda dapat pantau provinsi lain cukup dengan ketik nama provinsi anda"
         # msg.media(
         #     "https://infeksiemerging.kemkes.go.id/storage/posts/May2021/ENnufhHVqBJr4JQix8mL.png")
         # tidak pakai gambar karena memperlambat jalannya app
@@ -105,12 +129,23 @@ def sms_reply():
         msg.body(text2+text)
         responded = True
 
-    if '7' in pesan:
+    def vaksin():
+        v_update = r.get("https://vaksincovid19-api.vercel.app/api/vaksin")
+        vdata = v_update.json()
+        text = f"*🇮🇩 Informasi vaksinasi Indonesia 🇮🇩* \n\nTotal Target Vaksinasi : {vdata['totalsasaran']}\n"
+        text2 = f"🎯Target vaksinasi tenaga medis :\n{vdata['sasaranvaksinsdmk']}\n"
+        text3 = f"🎯Target vaksinasi lansia :\n{vdata['sasaranvaksinlansia']}\n"
+        text4 = f"🎯Target vaksinasi petugas publik :\n{vdata['sasaranvaksinpetugaspublik']}\n\n"
+        vaxinasi = f"Progress Vaksinasi \n ✅Vaksinasi Tahap 1 :\n{vdata['vaksinasi1']}\n ✅Vaksinasi Tahap 2 : \n{vdata['vaksinasi2']}\n\n sumber data: dekontaminasi api"
+        msg.body(text+text2+text3+text4+vaxinasi)
+
+    if '7' in pesan or 'Vaksin' in pesan or 'vaksin' in pesan or 'Vaksinasi' in pesan or 'vaksinasi' in pesan:
      # Menampilkan daftar rumah sakit indonesia
-        text = f"Menurut data Kementerian Kesehatan saat ini ada 132 Rumah Sakit rujukan di indonesia untuk penanganan kasus COVID-19.\n\n"
-        text2 = f"Ketik nama daerah sesuai daerah yang ingin kamu cari tau\nBerikut daftarnya :\n\n"
-        text3 = f"1.Aceh\n2.Sumatera Utara\n3.Sumatera Barat\n4.Riau\n5.Kepulauan Riau\n6.Jambi\n7.Sumatera Selatan\n8.Bangka Belitung\n9.Bengkulu\n10.Lampung\n11.DKI Jakarta\n12.Jawa Barat\n13.Banten\n14.Jawa Tengah\n15.Daerah Istimewa Yogyakarta\n16.Jawa Timur\n17.Bali\n18.Nusa Tenggara Barat\n19.Nusa Tenggara Timur\n20.Kalimantan Barat\n21.Kalimantan Tengah\n22.Kalimantan Selatan\n23.Kalimantan Timur\n24.Kalimantan Utara\n25.Gorontalo\n26.Sulawesi Utara\n27.Sulawesi Barat\n28.Sulawesi Tengah\n29. Sulawesi Selatan\n30.Sulawesi Tenggara\n31.Maluku\n32.Maluku Utara\n33.Papua\n34.Papua Barat  \n\n"
-        msg.body(text+text2+text3)
+        vaksin()
+        rsx = f".\n\nMenurut data Kementerian Kesehatan saat ini ada 132 Rumah Sakit rujukan di indonesia untuk penanganan kasus COVID-19.\n\n"
+        rsx2 = f"Ketik nama daerah sesuai daerah yang ingin kamu cari tau\nBerikut daftarnya :\n\n"
+        rsx3 = f"1.Aceh\n2.Sumatera Utara\n3.Sumatera Barat\n4.Riau\n5.Kepulauan Riau\n6.Jambi\n7.Sumatera Selatan\n8.Bangka Belitung\n9.Bengkulu\n10.Lampung\n11.DKI Jakarta\n12.Jawa Barat\n13.Banten\n14.Jawa Tengah\n15.Daerah Istimewa Yogyakarta\n16.Jawa Timur\n17.Bali\n18.Nusa Tenggara Barat\n19.Nusa Tenggara Timur\n20.Kalimantan Barat\n21.Kalimantan Tengah\n22.Kalimantan Selatan\n23.Kalimantan Timur\n24.Kalimantan Utara\n25.Gorontalo\n26.Sulawesi Utara\n27.Sulawesi Barat\n28.Sulawesi Tengah\n29. Sulawesi Selatan\n30.Sulawesi Tenggara\n31.Maluku\n32.Maluku Utara\n33.Papua\n34.Papua Barat  \n\n"
+        msg.body(rsx+rsx2+rsx3)
         responded = True
 
     # Tutup Menampilkan daftar rumah sakit indonesia
@@ -162,23 +197,23 @@ def sms_reply():
         pl = pesan.lower()
         if "aceh" in pl:
             cari("Aceh")
-        if "sumatera utara" in pl or "sumut" in pl:
+        if "sumatera utara" in pl or "sumut" in pl or "medan" in pl:
             cari('Sumatera Utara')
             # rs(f'a. RSUP H Adam Malik \nb. RSU Djasamen Saragih \nc. RSU Padang Sidempuan \nd. RSU Kabanjahe \ne. RSUD Tarutung')
-        if "sumatera barat" in pl or "sumbar" in pl:
+        if "sumatera barat" in pl or "sumbar" in pl or "padang" in pl:
             cari('Sumatera Barat')
             # rs(f"a. RSUP dr M Djamil \nb. RSU Achmad Mochtar")
-        if "kepulauan riau" in pl or "kepri" in pl or "Kep. Riau" in pl:
+        if "kepulauan riau" in pl or "kepri" in pl or "Kep. Riau" in pl or "tanjungpinang" in pl:
             cari('Kep. Riau')
             # rs(f"a. RSUD Prov Kep Riau Tanjung Pinang \nb. RSUD Embung Fatimah \nc. RSUD Muhammad Sani Kab Karimun \nd. RS Badan Pengusahaan Batam")
-        if "riau" in pl:
+        if "riau" in pl or "pekanbaru" in pl:
             cari('Riau')
             # rs(f"a. RSU Arifin Achmad \nb. RSUD Kota Dumai \nc. RSUD Puri Husada Tembilahan")
 
         if "jambi" in pl:
             cari('Jambi')
             # rs(f"a. RSUD Raden Mattaher")
-        if "sumatera selatan" in pl or "sumsel" in pl:
+        if "sumatera selatan" in pl or "sumsel" in pl or "palembang" in pl:
             cari('Sumatera Selatan')
             # rs(f"a. RSUP M Hoesin \nb. RS Dr Rivai Abdullah \nc. RSUD Siti Fatimah Prov Sumsel \nd. RSUD Lahat \ne. RSUD Kayuagung")
         if "bangka belitung" in pl or 'Kep. Bangka Belitung' in pl:
@@ -193,20 +228,20 @@ def sms_reply():
         if "dki jakarta" in pl or "jakarta" in pl or "dki" in pl:
             cari("DKI Jakarta")
             # rs(f"a. RSPI Prof Dr Sulianti Saroso \nb. RSUP Persahabatan \nc. RSUP Fatmawati \nd. RSUD Cengkareng \ne. RSUD Pasar Minggu \nf. RS Bhayangkara Tk I R Said Sukanto \ng. RSPAD Gatot Soebroto \nh. RSAL dr Mintoharjo")
-        if "jawa barat" in pl or "jabar" in pl:
+        if "jawa barat" in pl or "jabar" in pl or "bandung" in pl:
             cari("Jawa Barat")
             # rs(f"a. RSUP dr Hasan Sadikin \nb. RS Paru Dr HA Rotinsulu \nc. RS Paru dr M Goenawan Partowidigdo \nd. RSUD Gunung Jati Cirebon \ne. RSUD R Syamsudin, SH Sukabumi \nf. RSUD dr Slamet Garut \ng. RSUD Kab Indramayu \nh. RSU Tk II Dustira")
         if "banten" in pl:
             cari("Banten")
             # rs(f"a. RSUD Kab Tangerang \nb. RSUD dr Drajat Prawiranegara Serang")
-        if "jawa tengah" in pl or "jateng" in pl:
+        if "jawa tengah" in pl or "jateng" in pl or "semarang" in pl:
             # PROBLEM GK JALAN lebih 1600
             cari("Jawa Tengah")
             # rs(f"a. RSUP dr Kariadi \nb. RS dr Soeradji Tirtonegoro Klaten \nc. RS Paru dr Ario Wirawan \nd. RSUD Prof Dr Margono Soekarjo \ne. RSUD dr Moewardi Surakarta \nf. RSUD Tidar Magelang \ng. RSUD KRMT Wongsonegoro \nh. RSUD Kardinah Tegal \ni. RSUD Banyumas \nj. RSU dr Loekmonohadi \nk. RSUD Kraton Kab Pekalongan \nl. RSUD dr Soeselo Slawi \nm. RSUD RAA Soewondo Kendal")
         if "daerah istimewa yogyakarta" in pl or "yogyakarta" in pl or "jogja" in pl or "diy" in pl:
             cari('DI Yogyakarta')
             # rs(f"a. RSUP dr Sardjito \nb. RSUD Panembahan Senopati Bantul \nc. RSUD Kota Yogyakarta \nd. RSUD Wates")
-        if "jawa timur" in pl or "jatim" in pl or "Jawa Timur" in pl:
+        if "jawa timur" in pl or "jatim" in pl or "Jawa Timur" in pl or "surabaya" in pl:
             # PROBLEM GK JALAN lebih 1600 karakter
             cari('Jawa Timur')
             # rs(f"a. RSUD dr Soetomo \nb. RSUD dr Soedono Madiun \nc. RSUD dr Saiful Anwar \nd. RSUD dr Soebandi Jember \ne. RSUD Kab Kediri Pare \nf. RSUD dr R Koesma tuban \ng. RSUD Blambangan \nh. RSUD Dr R Sosodoro Djatikoesoemo \ni. RSUD Dr Iskak Tulungagung \nj. RSUD Sidoarjo \nk. RS Universitas Airlangga")
