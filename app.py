@@ -33,6 +33,7 @@ elif(server == 2):
 # SERVER 1 DEKONTAMINASI
 # SERVER 2 COVID19.GO.ID PEMERINTAH
 server_ind = 2
+
 if (server_ind == 1):
     xin = r.get('https://dekontaminasi.com/api/id/covid19/stats')
     cov_raw = xin.json()
@@ -58,12 +59,12 @@ if (server_ind == 1):
     cov_provin = cov_raw_diy['regions']
 if (server_ind == 2):
     # BELUM DIPERBAIKI NANTI DISEUASIKAN SAMA BAGIAN COVID.ID PEMERINTAh
-    resp_diy = r.get('https://dekontaminasi.com/api/id/covid19/stats')
+    resp_diy = r.get('https://data.covid19.go.id/public/api/prov.json')
     cov_raw_diy = resp_diy.json()
-    cov_total_diy = cov_raw_diy['regions'][9]['numbers']['infected']
-    cov_meninggal_diy = cov_raw_diy['regions'][9]['numbers']['fatal']
-    cov_sembuh_diy = cov_raw_diy['regions'][9]['numbers']['recovered']
-    cov_provin = cov_raw_diy['regions']
+    cov_total_diy = cov_raw_diy['list_data'][9]['jumlah_kasus']
+    cov_meninggal_diy = cov_raw_diy['list_data'][9]['jumlah_meninggal']
+    cov_sembuh_diy = cov_raw_diy['list_data'][9]['jumlah_sembuh']
+    cov_provin = cov_raw_diy['list_data']
 # fungsi untuk menampilkan stat tiap provinsi
 
 
@@ -186,9 +187,15 @@ def sms_reply():
             "https://raw.githubusercontent.com/muhiqsimui/PyTraining/main/json/rs.json")
         datrs = rs_url.json()
         for pro in cov_provin:
-            if pro['name'] == kota:
-                rs(f".\n *{pro['name']}* \n Kasus :{pro['numbers']['infected']} \n Sembuh : {pro['numbers']['recovered']} \n Meninggal :{pro['numbers']['fatal']}\n\n")
+            if (server_ind == 1):
+                if pro['name'] == kota:
+                    rs(f".\n *{pro['name']}* \n Kasus :{pro['numbers']['infected']} \n Sembuh : {pro['numbers']['recovered']} \n Meninggal :{pro['numbers']['fatal']}\n\n")
+            elif(server_ind == 2):
+                kotax=kota.upper()
+                if pro['key'] == kotax:
+                    rs(f".\n *{pro['key']}* \n Kasus :{pro['jumlah_kasus']} \n Sembuh : {pro['jumlah_sembuh']} \n Meninggal :{pro['jumlah_meninggal']}\n\n")
         for j in datrs:
+            # kota=kota.title()
             if j['province'] == kota:
                 rs(f".\n\n *{j['province']}* \nKota : {j['region']}\nNama RS :{j['name']}\nTelepon :{j['phone']}\nAlamat RS :{j['address']}\n.\n.")
 
@@ -281,7 +288,7 @@ def sms_reply():
         if "sulawesi tengah" in pl or "sulteng" in pl:
             cari('Sulawesi Tengah')
             # rs(f"a. RSUD Undata Palu \nb. RSU Anutapura Palu \nc. RSUD Kan Banggai Luwuk \nd. RSU Mokopido Toli-Toli \ne. RSUD Kolonedale")
-        if "sulawesi selatan" in pl or "sulsel" in pl:
+        if "sulawesi selatan" in pl or "sulsel" in pl or "makassar" in pl:
             cari('Sulawesi Selatan')
             # rs(f"a. RSUP dr Wahidin Sudirohusodo \nb. RS Dr Tadjudin Chalid, MPH \nc. RSUD Labuang Baji \nd. RSU Andi Makkasau Parepare \ne. RSU Lakipadada Toraja \nf. RSUD Kab Sinjai \ng. RS TK II Pelamonia")
         if "sulawesi tenggara" in pl or "sultara" in pl:
