@@ -32,7 +32,7 @@ elif(server == 2):
 # indonesia
 # SERVER 1 DEKONTAMINASI
 # SERVER 2 COVID19.GO.ID PEMERINTAH
-server_ind = 2
+server_ind = 1
 
 if (server_ind == 1):
     xin = r.get('https://dekontaminasi.com/api/id/covid19/stats')
