@@ -21,6 +21,10 @@ REQUIREMENT
 ```console
 pip install flask
 ```
+- Requets
+```console
+pip install requests
+```
 - Twilio
 ```console
 pip install twilio
