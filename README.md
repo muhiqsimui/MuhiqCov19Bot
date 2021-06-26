@@ -16,7 +16,7 @@ then this code will be online
 hook web from ngrok and open twilio then copy link to webhook and test app on your whatsapp
 
 REQUIREMENT
-- Python 3
+- Python 3.7.1
 - Flask 
 ```console
 pip install flask
