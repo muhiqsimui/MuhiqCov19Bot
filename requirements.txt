@@ -31,7 +31,7 @@ Pillow==8.0.1
 PyAutoGUI==0.9.52
 pycparser==2.20
 PyGetWindow==0.0.9
-PyJWT==1.7.1
+PyJWT==2.1.0
 pylint==2.2.2
 PyMsgBox==1.0.9
 pynput==1.6.8
