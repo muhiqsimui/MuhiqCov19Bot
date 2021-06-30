@@ -35,7 +35,7 @@ PyJWT==2.1.0
 pylint==2.2.2
 PyMsgBox==1.0.9
 pynput==1.6.8
-pyperclip==1.8.1
+pyperclip==1.8.2
 PyRect==0.1.4
 PyScreeze==0.1.27
 PySocks==1.6.8
