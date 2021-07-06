@@ -1,5 +1,5 @@
 appdirs==1.4.4
-astroid==2.1.0
+astroid==2.6.2
 certifi==2021.5.30
 cffi==1.14.4
 chardet==3.0.4
