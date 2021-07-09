@@ -34,7 +34,7 @@ PyGetWindow==0.0.9
 PyJWT==2.1.0
 pylint==2.9.1
 PyMsgBox==1.0.9
-pynput==1.6.8
+pynput==1.7.3
 pyperclip==1.8.2
 PyRect==0.1.4
 PyScreeze==0.1.27
