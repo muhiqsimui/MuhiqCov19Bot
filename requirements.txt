@@ -39,7 +39,7 @@ pyperclip==1.8.2
 PyRect==0.1.4
 PyScreeze==0.1.27
 PySocks==1.7.1
-python-dateutil==2.8.1
+python-dateutil==2.8.2
 PyTweening==1.0.3
 pytz==2021.1
 requests==2.26.0
