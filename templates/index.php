@@ -140,7 +140,7 @@
             </div>
           </div>
           <div class="col">
-            Debug
+            -
           </div>
         </div>
         <!-- tutup update -->
