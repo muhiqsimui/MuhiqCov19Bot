@@ -14,6 +14,7 @@ ngrok http 5000
 then this code will be online
 
 hook web from ngrok and open twilio then copy link to webhook and test app on your whatsapp
+or we can host the app to heroku hosting
 
 Requirements  
 - Python 3.7.1
