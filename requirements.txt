@@ -3,7 +3,7 @@ astroid==2.1.0
 branca==0.4.2
 certifi==2019.3.9
 cffi==1.14.4
-chardet==3.0.4
+chardet==4.0.0
 click==7.1.2
 cmake==3.18.4.post1
 colorama==0.4.1
