@@ -1,0 +1,128 @@
+{% extends 'theme/home.html' %}
+{% block view %}
+
+<div class="row">
+  <div class="col">
+    <h1>Welcome to Covid-19 Whatsapp Bot</h1>
+    <h6>Code By {{ me }}</h6>
+    <p>Informatika, Universitas Islam Indonesia</p>
+  </div>
+</div>
+<hr>
+<!-- data covid19  -->
+<div class="row">
+  <div class="col-md-3">
+    <h5>Total Kasus Dunia</h5>
+    Total Kasus : {{case_world}}
+    <br>
+    Sembuh : {{cov_recover_world}}
+    <br>
+    Meninggal : {{cov_death_world}}
+
+  </div>
+  <div class="col-md-3">
+    <h5>Total Kasus Indonesia</h5>
+    Total Kasus : {{ positifCovid }}
+    <br>
+    Sembuh : {{ sembuh }}
+    <br>
+    Meninggal : {{ kematian }}
+    <br>
+    Dirawat : {{ dirawat }}
+  </div>
+  <div class="col">
+    <h5>Total Kasus Yogyakarta</h5>
+    Total kasus : <span id="total_kasus_diy"></span>{{total_diy}}
+    <br>
+    Sembuh : <span id=sembuh_diy>{{sembuh_diy}}</span>
+    <br>
+    Dirawat : <span id=dirawat_diy>{{dirawat_diy}}</span>
+    <br>
+    Meninggal : <span id="meninggal_diy">{{meninggal_diy}}</span>
+  </div>
+</div>
+<!-- tutup data covid19 -->
+<br>
+
+<br>
+<!-- update kasus -->
+<div class="row">
+  <div class="col">
+    <div class="row">
+      <h4>Update Terkini COVID-19 Indonesia</h4>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p>Jumlah Positif </p>
+      </div>
+      <div class="col">
+        <p>: {{upd_jumlah_positif}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p>Jumlah Meninggal </p>
+      </div>
+      <div class="col">
+        <p>: {{upd_jumlah_meninggal}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p>Jumlah Sembuh </p>
+      </div>
+      <div class="col">
+        <p>: {{upd_jumlah_sembuh}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p>Jumlah Dirawat</p>
+      </div>
+      <div class="col">
+        <p>: {{upd_jumlah_dirawat}}</p>
+      </div>
+    </div>
+    <div class="row">
+      Last update : {{upd_tanggal}}
+    </div>
+  </div>
+  <div class="col">
+    -
+  </div>
+</div>
+<!-- tutup update -->
+<br>
+<!-- banner bawah  -->
+<div class="row">
+  <div class="col">
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner" style=" width:100%; height: 600px !important;">
+        <div class="carousel-item active">
+          <img src="https://covid19.go.id/storage/app/media/slider-oct.png" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="https://covid19.go.id/storage/app/media/slider/slidervide.jpeg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="https://covid19.go.id/storage/app/media/slider/Banner%20Pendaftaran%20Vaksin%20Lansia-01.jpg"
+            class="d-block w-100" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+</div>
+<!-- tutup banner bawah  -->
+
+{% endblock %}

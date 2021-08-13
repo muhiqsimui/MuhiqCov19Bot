@@ -1,0 +1,50 @@
+{% extends 'theme/home.html' %}
+{% block view%}
+
+<div class="row">
+    <h1>Deteksi Mandiri Cepat COVID-19</h1>
+    <hr>
+
+    <div class="container">
+        <p>Deteksi Mandiri Cepat COVID-19 adalah salah satu cara untuk membantu mempercepat tindakan apakah Anda sehat
+            atau
+            memiliki gejala yang memerlukan pemeriksaan dan pengujian lebih lanjut mengenai COVID-19</p>
+    </div>
+
+    <table border="1px">
+        <thead>
+            <tr>
+                <th>Gejala Yang dirasakan</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-md-10"> Apakah saat ini kamu sedang merasa demam atau badan kamu panas ?</td>
+                <td class="col">
+                    <div class="form-group">
+                        <div class="radio">
+                            <label class="container_radio">Tidak
+                                <input type="radio" class="c1" name="c1" id="c1" value="0">
+                                <span class="checkmark_t"></span>
+                            </label>
+                        </div>
+                    </div>
+                </td>
+                <td class="col">
+                    <div class="form-group">
+                        <div class="radio">
+                            <label class="container_radio">Ya
+                                <input type="radio" class="c1" name="c1" id="c1" value="1">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <button class="btn-primary"> Cek </button>
+</div>
+{% endblock %}

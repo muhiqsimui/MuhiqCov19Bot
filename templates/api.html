@@ -1,0 +1,62 @@
+{% extends 'theme/home.html' %}
+{% block view%}
+
+<style>
+    table,
+    tr,
+    td,
+    th {
+        border: solid black 1px;
+        text-align: center;
+    }
+
+    td {
+        padding: 10px;
+    }
+
+    h3 {
+        color: rgb(0, 7, 112);
+    }
+</style>
+
+<hr>
+<h3 align=center> API Documentation </h3>
+<hr>
+<table>
+    <label for="">Daftar API yang digunakan</label>
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>API</th>
+            <th>Information API</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>API Kementerian Kesehatan</td>
+            <td>
+                <ul>
+                    <li>https://data.covid19.go.id/public/api/prov.json</li>
+                    <li>https://data.covid19.go.id/public/api/update.json</li>
+                    <li>https://data.covid19.go.id/public/api/pemeriksaan-vaksinasi.json</li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <td>1</td>
+            <td>API Mathdroid id</td>
+            <td>
+                <ul>
+                    <li>https://covid19.mathdro.id/api</li>
+                    <li>https://covid19.mathdro.id/api/countries/</li>
+
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+
+{% endblock %}
